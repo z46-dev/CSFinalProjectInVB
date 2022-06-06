@@ -82,15 +82,20 @@ Public Class Form1
             End If
             current.value.physics()
         End While
-        If entities.size < 10 And Rnd() > 0.85 Then
+        If entities.size < 10 And Rnd() > 0.95 Then
             Randomize()
             Dim ent As New Entity(Rnd() * Me.Size.Width, Rnd() * Me.Size.Height, 100)
             ent.setVelocity(Rnd() * 2 - 1, Rnd() * 2 - 1)
         End If
         WorldWide.playerLevel = Math.Floor(Math.Sqrt(WorldWide.playerPoints))
+        If WorldWide.playerLevel > WorldWide.oldPlayerLevel And WorldWide.playerLevel Mod 2 Then
+            WorldWide.addMessage("New powerup woo!!")
+        End If
+        WorldWide.oldPlayerLevel = WorldWide.playerLevel
         myGraphics.DrawString("Score: " & WorldWide.playerPoints, New Font("Ubuntu", 16), Brushes.White, New PointF(10, 10))
         myGraphics.DrawString("Level: " & WorldWide.playerLevel, New Font("Ubuntu", 16), Brushes.White, New PointF(10, 30))
         myGraphics.DrawString("Health: " & player.health.getHealth() * 100 & "%", New Font("Ubuntu", 16), Brushes.White, New PointF(10, 50))
+        WorldWide.drawMessages(myGraphics)
     End Sub
     Dim player As Entity, mouseX As Double, mouseY As Double
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
