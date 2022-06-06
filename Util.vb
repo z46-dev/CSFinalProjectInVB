@@ -25,6 +25,9 @@ Module Util
         Public Sub damage(dmg As Integer)
             amount -= dmg
         End Sub
+        Public Sub heal()
+            amount = max
+        End Sub
         ' Tells you if you have no health left
         Public Function isDead() As Boolean
             Return amount <= 0
@@ -40,10 +43,12 @@ Module Util
         Public Sub New()
             ' Do nothing
         End Sub
+        ' Return direction of my X and Y movement
         Public Function getDirection()
             Return Math.Atan2(y, x)
         End Function
     End Class
+    ' Draw a shape at X, Y with some sides and a radius facing any which way
     Public Sub drawShape(graphics As Graphics, pen As Pen, x As Single, y As Single, sides As Integer, radius As Single, angle As Single)
         Dim state = graphics.Save(), points(sides + 1) As PointF
         For i As Integer = 0 To sides + 1
