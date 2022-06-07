@@ -68,7 +68,11 @@ Module LinkedList
         Public Function shift()
             If TypeOf after Is Node Then
                 Dim returnValue = after.value
-                after = after.after
+                If TypeOf after Is Node Then
+                    after = after.after
+                Else
+                    after = New Object()
+                End If
                 size -= 1
                 Return returnValue
             End If
