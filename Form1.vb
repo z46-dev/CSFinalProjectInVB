@@ -22,13 +22,13 @@ Public Class Form1
             End If
             ' If the player exists
             If TypeOf Form1.player Is Entity Then
-                ' Move to it
+                ' Move to the player
                 Dim angle As Double = Math.Atan2(Form1.player.y - y, Form1.player.x - x)
                 velocity.x = Math.Cos(angle)
                 velocity.y = Math.Sin(angle)
-                ' If we're too close
+                ' If we're too close...
                 If Util.circleCollision(Me, Form1.player) Then
-                    ' Bounce
+                    ' Bounce the two entities
                     Dim collisionAngle As Double = Math.Atan2(Form1.player.y - y, Form1.player.x - x)
                     Me.velocity.x -= Math.Cos(collisionAngle) * 10
                     Me.velocity.y -= Math.Sin(collisionAngle) * 10
@@ -57,17 +57,17 @@ Public Class Form1
                 velocity.y *= -1
                 acceleration.y *= -2
             End If
-            ' Move
+            ' Move in desired direction
             x += acceleration.x * speed
             y += acceleration.y * speed
         End Sub
-        ' Draw me (but only for players)
+        ' Draw the player on the screen
         Public Sub draw()
             Dim pen As New Pen(color, radius)
             Form1.myGraphics.DrawEllipse(pen, Convert.ToSingle(x - radius / 2), Convert.ToSingle(y - radius / 2), radius * 2, radius * 2)
             pen.Dispose()
         End Sub
-        ' Draw me (but only for enemies/bots)
+        ' Draw the enemy on the screen
         Public Sub drawAsEnemy()
             Dim pen As New Pen(color, radius)
             Util.drawShape(Form1.myGraphics, pen, x, y, 3, radius, velocity.getDirection())
