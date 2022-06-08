@@ -9,6 +9,8 @@ Module Util
 
     ' Circle Collision
     ' Checks if two circles (with the properties x, y and radius) are touching eachother
+    ' Precondition: p1 and p2 must be an Object with x, y and radius properties.
+    ' Postcondition: returns true if the circles overlap in any way.
     Public Function circleCollision(p1 As Object, p2 As Object) As Boolean
         Return Math.Sqrt((p2.x - p1.x) ^ 2 + (p2.y - p1.y) ^ 2) < p1.radius + p2.radius
     End Function
